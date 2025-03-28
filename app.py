@@ -3,6 +3,7 @@ import sqlite3
 import datetime
 import google.generativeai as genai
 import os
+import wikipedia
 
 api = "AIzaSyDGf2az9G60TO74Qw8qB5UIGCa3iWZp1KQ"
 genai.configure(api_key=api)
@@ -41,6 +42,14 @@ def foodexp_pred():
     q = float(request.form.get("q"))
     return(render_template("foodexp_pred.html",r=(q*0.4851)+147.4))
 
+@app.route("/foodexp1",methods=["POST","GET"])
+def foodexp1():
+    return(render_template("foodexp1.html"))
+
+@app.route("/foodexp2",methods=["POST","GET"])
+def foodexp2():
+    return(render_template("foodexp2.html"))
+
 @app.route("/ethical_test",methods=["POST","GET"])
 def ethical_test():
     return(render_template("ethical_test.html"))
@@ -61,6 +70,13 @@ def FAQ():
 def FAQ1():
     r = model.generate_content("Factors for Profit")
     return(render_template("FAQ1.html",r=r.candidates[0].content.parts[0]))
+
+@app.route("/FAQinput",methods=["POST","GET"])
+def FAQinput():
+    q = request.form.get("q")
+    r = wikipedia.summary(q)
+    return(render_template("FAQinput.html",r=r))
+
 
 @app.route("/userLog",methods=["POST","GET"])
 def userLog():
