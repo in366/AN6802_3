@@ -5,7 +5,7 @@ import google.generativeai as genai
 import os
 import wikipedia
 
-api = "AIzaSyDGf2az9G60TO74Qw8qB5UIGCa3iWZp1KQ"
+api = os.getenv("genai")
 genai.configure(api_key=api)
 model = genai.GenerativeModel("gemini-1.5-flash")
 
